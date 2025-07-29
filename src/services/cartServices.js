@@ -4,10 +4,12 @@ const cartServices = {
   async getCart(userId) {
     return await cartDAO.getCartByUserId(userId);
   },
-  async createCart(userId) {
-    return await cartDAO.createCart(userId);
-  },
-  async addProduct(userId, productId, quantity = 1) {
+  async addProduct(userId, productId, quantity) {
+    const cart = await cartDAO.getCartByUserId(userId);
+
+    if (!cart) {
+    await cartDAO.createCart(userId);
+  }
     return await cartDAO.addProductToCart(userId, productId, quantity);
   },
   async updateQuantity(userId, productId, quantity) {

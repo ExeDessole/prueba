@@ -4,6 +4,7 @@ export async function getCart(req, res) {
   try {
     const userId = req.user.id;
     const cart = await cartServices.getCart(userId);
+    if(!cart)
     res.render("product/cart", { cart });
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -23,7 +24,7 @@ export async function addProduct(req, res) {
     });
 
     await cartServices.addProduct(userId, productId, quantity);
-    res.redirect("/cart");
+    res.redirect("/cart");//Quitar y agragar boton "Carrito" en views de productList
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

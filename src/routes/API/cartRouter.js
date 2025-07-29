@@ -11,7 +11,7 @@ import { authenticateToken } from "../../middlewares/authToken.js";
 const cartRouter = Router();
 
 cartRouter.get("/", authenticateToken, authorizeUser, getCart);
-cartRouter.post("/add/:id", authenticateToken, authorizeUser, addProduct);
+cartRouter.post("/add/:productId", authenticateToken, authorizeUser, addProduct);
 cartRouter.delete("/remove/:productId", authenticateToken, authorizeUser, removeProduct);
 cartRouter.delete("/clear", authenticateToken, authorizeUser, clearCart);
 

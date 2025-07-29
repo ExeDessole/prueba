@@ -1,8 +1,9 @@
 import cartModel from "./models/cartModel.js";
 
 const cartDAO = {
-  createCart(userId) {
-    return cartModel.create({ user: userId, products: [] });
+  createCart(userId){
+    const cart = new cartModel({ user: userId, products: [] });
+    return cart.save();
   },
   getCartByUserId(userId) {
     return cartModel.findOne({ user: userId }).populate("products.product");
@@ -13,7 +14,8 @@ const cartDAO = {
       { $push: { products: { product: productId, quantity } } },
       { new: true, upsert: true }
     );
-  },
+}
+,
   updateProductQuantity(userId, productId, quantity) {
     return cartModel.findOneAndUpdate(
       { user: userId, "products.product": productId },
