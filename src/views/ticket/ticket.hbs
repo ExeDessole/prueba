@@ -1,0 +1,11 @@
+<h1>Compra realizada con éxito</h1>
+<p><strong>Código:</strong> {{ticket.code}}</p>
+<p><strong>Fecha:</strong> {{ticket.purchase_datetime}}</p>
+<p><strong>Total:</strong> ${{ticket.amount}}</p>
+
+<h2>Productos:</h2>
+<ul>
+  {{#each ticket.products}}
+    <li>{{this.product.name}} (x{{this.quantity}}) - ${{this.product.price}}</li>
+  {{/each}}
+</ul>

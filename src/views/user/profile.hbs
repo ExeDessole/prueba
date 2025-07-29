@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Perfil</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f4f4f4;
+    }
+
+    .container {
+      text-align: center;
+      background: white;
+      padding: 3rem 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      width: 90%;
+    }
+
+    h1 {
+      margin-bottom: 2rem;
+      color: #333;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 2rem;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 0.75rem;
+      text-align: left;
+    }
+
+    th,{
+      background-color: #007BFF;
+      color: white;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    a.button {
+      text-decoration: none;
+      background-color: #007BFF;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+      user-select: none;
+    }
+
+    a.button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Este es tu perfil</h1>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Edad</th>
+          <th>Email</th>
+          <th>Rol</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>{{user.first_name}}</td>
+        <td>{{user.last_name}}</td>
+        <td>{{user.age}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.role}}</td>
+      </tr>
+
+      </tbody>
+    </table>
+
+<div class="buttons">
+
+  <form id="logout-form" action="api/session/logout" method="POST" style="display: none;"></form>
+  <a class="button" href="#" onclick="document.getElementById('logout-form').submit(); return false;">Logout</a>
+  <a class="button" href="/recovery">Cambiar contraseña</a>
+
+</div>
+
+
+
+</body>
+</html>

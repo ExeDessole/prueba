@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Error</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 2rem;
+    }
+    .message {
+      color: red;
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 0 10px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Algo salió mal 😞</h1>
+
+  {{#if errorMessage}}
+    <p class="message">{{errorMesage}}</p>
+  {{else}}
+    <p class="message">Ocurrió un error inesperado.</p>
+  {{/if}}
+
+  <div>
+    <form action="/login" method="get" style="display: inline;">
+      <button type="submit">Intentalo de nuevo</button>
+    </form>
+
+    <form action="/register" method="get" style="display: inline;">
+      <button type="submit">Crea una nueva cuenta</button>
+    </form>
+  </div>
+
+</body>
+</html>

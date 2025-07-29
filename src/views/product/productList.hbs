@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Productos</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 2rem;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f4f4;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 2rem;
+      color: #333;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+
+    .card h3 {
+      margin: 0.5rem 0;
+      color: #007BFF;
+    }
+
+    .card p {
+      margin: 0.3rem 0;
+      color: #444;
+      font-size: 0.95rem;
+    }
+
+    .card .price {
+      font-weight: bold;
+      margin: 0.5rem 0;
+      font-size: 1.1rem;
+      color: #28a745;
+    }
+
+    .card form {
+      margin-top: auto;
+    }
+
+    .card button {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      width: 100%;
+    }
+
+    .card button:hover {
+      background-color: #0056b3;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Catálogo de Productos</h1>
+
+    <div class="grid">
+      {{#each products}}
+      <div class="card">
+        {{#if this.images.[0]}}
+          <img src="{{this.images.[0]}}" alt="{{this.name}}" />
+        {{else}}
+          <img src="/placeholder.jpg" alt="Sin imagen" />
+        {{/if}}
+
+        <h3>{{this.name}}</h3>
+        <p>{{this.description}}</p>
+        <p><strong>Categoría:</strong> {{this.category}}</p>
+        <p class="price">$ {{this.price}}</p>
+        <p><strong>Stock:</strong> {{this.stock}}</p>
+
+        <form action="/cart/add/{{this._id}}" method="POST">
+          <button type="submit">Agregar al carrito</button>
+        </form>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+
+</body>
+</html>

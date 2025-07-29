@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registrarse</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f4f4f4;
+    }
+
+    .container {
+      background: white;
+      padding: 2rem 2.5rem;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 350px;
+    }
+
+    h1 {
+      margin-bottom: 1.5rem;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.7rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    button {
+      width: 100%;
+      padding: 0.75rem;
+      background-color: #28a745;
+      color: white;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Registrarse</h1>
+    <form action="api/session/register" method="POST">
+      <input type="text" name="first_name" placeholder="Nombre" required />
+      <input type="text" name="last_name" placeholder="Apellido" required />
+      <input type="number" name="age" placeholder="Edad" required />
+      <input type="email" name="email" placeholder="Email" required />
+      <input type="password" name="password" placeholder="Contraseña" required />
+      <button type="submit">Crear cuenta</button>
+    </form>
+
+    <div style="margin-top: 10px; text-align: center;">
+      <a href="/recovery" style="text-decoration: none; color: #007bff;">¿Olvidaste tu contraseña?</a>
+      
+      <a href="/login" style="text-decoration: none; color: #007bff;">Iniciar sesión</a>
+    </div>
+
+  </div>
+</body>
+</html>
+
