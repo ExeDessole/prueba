@@ -11,7 +11,7 @@ const api = Router();
 api.use("/session", sessionsRouter);
 api.use("/user", usersRouter);
 api.use("/admin", adminRouter);
-api.use("/product", productRouter);
+api.use("/products", productRouter);
 api.use("/cart", cartRouter);
 api.use("/", ticketRouter);
 

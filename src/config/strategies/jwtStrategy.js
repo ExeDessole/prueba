@@ -5,7 +5,7 @@ const { JWT_SECRET } = process.env;
 
 const options = {
   jwtFromRequest: ExtractJwt.fromExtractors([
-    (req) => req.cookies?.jwt // 👈 Lee el JWT desde la cookie
+    (req) => req.cookies?.jwt // Lee el JWT desde la cookie
   ]),
   secretOrKey: JWT_SECRET,
 };

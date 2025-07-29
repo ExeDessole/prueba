@@ -8,7 +8,7 @@ const productDAO = {
   },
   // Devuelve todos los productos
   getProducts() {
-    return productModel.find(); // retorna una promesa
+    return productModel.find().lean(); // retorna una promesa
   },
   // Busca por descripción
   getByDescription(description) {
@@ -16,7 +16,7 @@ const productDAO = {
   },
   // Devuelve producto por ID
   getById(id) {
-    return productModel.findById(id);
+    return productModel.findById(id).lean();
   },
   // Actualiza producto por ID
   updateById(id, data) {

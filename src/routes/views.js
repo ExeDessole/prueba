@@ -3,6 +3,8 @@ import passport from "passport";
 import UserDTO from "../DTOs/userDTO.js"
 import mailRouter from "./API/mailRouter.js";
 import productServices from "../services/productServices.js";
+import cartServices from "../services/cartServices.js";
+import { authenticateToken } from "../middlewares/authToken.js";
 
 const views = Router();
 
@@ -42,9 +44,11 @@ views.get("/recovery/resetPassLink", (req, res) => {
   const { token } = req.query;
   res.render("recovery/resetPassLink", { token });
 });
+//Muestra todos los productos
 views.get("/products", async (req,res) => {
   const products = await productServices.getProducts();
-  res.render("product/productList", { products });
+  console.log(products);
+  res.render("product/productList",{ products });
 });
 
 // Página de error
@@ -53,33 +57,13 @@ views.get("/failed", (req, res) => {
 });
 
 //Vista del carrito
-views.get("/cart", async (req, res) => {
+views.get("/cart", authenticateToken, async (req, res) => {
   try {
     const userId = req.user._id;
     const cart = await cartServices.getCart(userId);
     res.render("product/cart", { cart });
   } catch (error) {
-    res.status(500).render("auth/failed", { error: error.message });
-  }
-});
-
-views.post("/cart/remove/:productId", async (req, res) => {
-  try {
-    const userId = req.user._id;
-    const productId = req.params.productId;
-    await cartServices.removeProduct(userId, productId);
-    res.redirect("/cart");
-  } catch (error) {
-    res.status(500).render("auth/failed", { error: error.message });
-  }
-});
-
-views.post("/cart/clear", async (req, res) => {
-  try {
-    const userId = req.user._id;
-    await cartServices.clear(userId);
-    res.redirect("/cart");
-  } catch (error) {
+    console.error("❌ Error al renderizar carrito:", error);
     res.status(500).render("auth/failed", { error: error.message });
   }
 });

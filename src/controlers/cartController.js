@@ -4,7 +4,7 @@ export async function getCart(req, res) {
   try {
     const userId = req.user._id;
     const cart = await cartServices.getCart(userId);
-    res.status(200).json(cart);
+    res.redirect("/cart");
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -13,9 +13,16 @@ export async function getCart(req, res) {
 export async function addProduct(req, res) {
   try {
     const userId = req.user._id;
-    const { productId, quantity } = req.body;
+    const productId = req.params.id;
+    const quantity = req.params.quantity;
+    console.log("🧾 Agregando producto al carrito:", {
+  userId,
+  productId,
+  quantity
+});
+
     const cart = await cartServices.addProduct(userId, productId, quantity);
-    res.status(200).json(cart);
+    res.redirect("/cart");
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -26,7 +33,7 @@ export async function removeProduct(req, res) {
     const userId = req.user._id;
     const { productId } = req.params;
     const cart = await cartServices.removeProduct(userId, productId);
-    res.status(200).json(cart);
+    res.redirect("/cart");
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -36,7 +43,7 @@ export async function clearCart(req, res) {
   try {
     const userId = req.user._id;
     const cart = await cartServices.clear(userId);
-    res.status(200).json(cart);
+    res.redirect("/cart");
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

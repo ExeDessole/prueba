@@ -107,7 +107,9 @@
         <p class="price">$ {{this.price}}</p>
         <p><strong>Stock:</strong> {{this.stock}}</p>
 
-        <form action="/cart/add/{{this._id}}" method="POST">
+        <form action="/api/cart/add/{{this._id}}" method="POST">
+          <input type="hidden" name="productId" value="{{this._id}}" />
+          <input type="hidden" name="quantity" value="1" />
           <button type="submit">Agregar al carrito</button>
         </form>
       </div>
