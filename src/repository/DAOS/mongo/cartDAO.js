@@ -34,7 +34,7 @@ const cartDAO = {
       { products: [] },
       { new: true }
     );
-  }
+  },
 };
 
 export default cartDAO;

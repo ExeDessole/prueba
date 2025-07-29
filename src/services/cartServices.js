@@ -18,7 +18,7 @@ const cartServices = {
   },
   async clear(userId) {
     return await cartDAO.clearCart(userId);
-  }
+  },
 };
 
 export default cartServices;

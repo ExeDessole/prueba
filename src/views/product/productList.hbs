@@ -89,11 +89,11 @@
 </head>
 <body>
 
-  <div class="container">
-    <h1>Catálogo de Productos</h1>
+<div class="container">
+  <h1>Catálogo de Productos</h1>
 
-    <div class="grid">
-      {{#each products}}
+  <div class="grid">
+    {{#each products}}
       <div class="card">
         {{#if this.images.[0]}}
           <img src="{{this.images.[0]}}" alt="{{this.name}}" />
@@ -108,14 +108,14 @@
         <p><strong>Stock:</strong> {{this.stock}}</p>
 
         <form action="/api/cart/add/{{this._id}}" method="POST">
-          <input type="hidden" name="productId" value="{{this._id}}" />
           <input type="hidden" name="quantity" value="1" />
           <button type="submit">Agregar al carrito</button>
         </form>
       </div>
-      {{/each}}
-    </div>
+    {{/each}}
   </div>
+</div>
+
 
 </body>
 </html>
