@@ -5,7 +5,7 @@ export async function getCart(req, res) {
     const userId = req.user.id;
     const cart = await cartServices.getCart(userId);
     if(!cart)
-    res.render("product/cart", { cart });
+    res.redirect("/cart");
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -21,10 +21,15 @@ export async function addProduct(req, res) {
       userId,
       productId,
       quantity,
-    });
+    });//Prueba a ver si envia lo solicitado
+    console.log("👉 req.user:", req.user);
+
 
     await cartServices.addProduct(userId, productId, quantity);
-    res.redirect("/cart");//Quitar y agragar boton "Carrito" en views de productList
+
+    const products = await productServices.getProducts();
+    const message = "Producto agregado";
+    res.render("product/productList", { products, message });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

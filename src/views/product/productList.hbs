@@ -92,11 +92,20 @@
 <div class="container">
   <h1>Catálogo de Productos</h1>
 
+  <div style="margin-bottom: 1.5rem; text-align: right;">
+    <a href="/cart" class="btn-cart">Ver carrito</a>
+  </div>
+  
   <div class="grid">
+    {{#if message}}
+      <div class="alert alert-success">
+        {{message}}
+      </div>
+    {{/if}}
     {{#each products}}
       <div class="card">
-        {{#if this.images.[0]}}
-          <img src="{{this.images.[0]}}" alt="{{this.name}}" />
+        {{#if this.images.length}}
+          <img src="{{this.images.length}}" alt="{{this.name}}" />
         {{else}}
           <img src="/placeholder.jpg" alt="Sin imagen" />
         {{/if}}
