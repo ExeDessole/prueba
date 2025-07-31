@@ -1,6 +1,6 @@
 import cartDAO from "../repository/DAOS/mongo/cartDAO.js";
 
-const cartService = {
+const cartServices = {
   async createCart(userId) {
     return await cartDAO.createCart(userId);
   },
@@ -23,11 +23,12 @@ const cartService = {
     }
 
     const existingProduct = cart.products.find(
-      (item) => item.product._id.toString() === productId
+    (item) => item.product && item.product._id?.toString() === productId
     );
 
+
     if (existingProduct) {
-      const newQuantity = existingProduct.quantity + quantity;
+      const newQuantity = existingProduct.quantity + Number(quantity);
       const updatedCart = await cartDAO.updateProductQuantity(userId, productId, newQuantity);
       return {
         status: "updated",
@@ -41,7 +42,7 @@ const cartService = {
       status: "added",
       message: "Producto agregado al carrito.",
       productId,
-      quantity: newQuantity,
+      quantity,
       cart: updatedCart,
     };
   },
@@ -59,4 +60,4 @@ const cartService = {
   },
 };
 
-export default cartService;
+export default cartServices;

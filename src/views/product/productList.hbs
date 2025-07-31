@@ -85,27 +85,43 @@
       background-color: #0056b3;
     }
 
+    #toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #28a745;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 5px;
+      z-index: 1000;
+      font-weight: bold;
+      font-family: 'Segoe UI', sans-serif;
+    }
   </style>
 </head>
 <body>
 
+  {{#if message}}
+    <div id="toast">{{message}}</div>
+    <script>
+      setTimeout(() => {
+        const toast = document.getElementById('toast');
+        if (toast) toast.remove();
+      }, 3000);
+    </script>
+  {{/if}}
+
 <div class="container">
   <h1>Catálogo de Productos</h1>
-
-  <div style="margin-bottom: 1.5rem; text-align: right;">
-    <a href="/cart" class="btn-cart">Ver carrito</a>
-  </div>
+  <form action="/api/cart/" method="GET">
+    <button type="submit">Ver carrito</button>
+  </form>
   
   <div class="grid">
-    {{#if message}}
-      <div class="alert alert-success">
-        {{message}}
-      </div>
-    {{/if}}
     {{#each products}}
       <div class="card">
-        {{#if this.images.length}}
-          <img src="{{this.images.length}}" alt="{{this.name}}" />
+        {{#if this.images.[0]}}
+          <img src="{{this.images.[0]}}" alt="{{this.name}}" />
         {{else}}
           <img src="/placeholder.jpg" alt="Sin imagen" />
         {{/if}}
@@ -117,6 +133,8 @@
         <p><strong>Stock:</strong> {{this.stock}}</p>
 
         <form action="/api/cart/add/{{this._id}}" method="POST">
+          <input type="hidden" name="id" value="{{this._id}}" />
+          <input type="number" name="quantity" value="1" />
           <button type="submit">Agregar al carrito</button>
         </form>
       </div>
@@ -124,6 +142,6 @@
   </div>
 </div>
 
-
 </body>
 </html>
+

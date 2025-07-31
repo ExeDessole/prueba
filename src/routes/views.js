@@ -51,9 +51,9 @@ views.get("/failed", (req, res) => {
 
 views.get("/cart", authenticateToken, async (req, res) => {
   try {
-    const userId = req.user.id; // Nota: id, no _id (como viene del JWT)
-    const cart = await cartServices.getCart(userId);
-    res.render("product/cart", { cart });
+    const userId = req.user.id;
+    const cart = await cartServices.getCartByUserId(userId);
+    res.render("product/cart", { cart: cart.toObject() });
   } catch (error) {
     console.error("❌ Error al renderizar carrito:", error);
     res.status(500).render("auth/failed", { error: error.message });

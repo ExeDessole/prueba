@@ -9,6 +9,7 @@ import views from "./routes/views.js";
 import api from "./routes/index.js";
 import { createDefaultAdmin } from "./utils.js";
 import cors from "cors";
+import methodOverride from "method-override";
 
 // Variables de entorno
 const app = express();
@@ -26,6 +27,7 @@ app.listen(PORT, () => {
 // Middlewares varios
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
 app.use(morgan("dev"));
 app.use(cookieParser());
 

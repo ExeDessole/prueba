@@ -6,7 +6,7 @@ const productSchema = new mongoose.Schema({
   price: { type: Number, required: true },
   stock: Number,
   category: String,
-  images: String,
+  images: [String],
   status: { type: String, default: "active" }
   }, {
 // COMO OPCIÓN genera fechas de creación y modificación
