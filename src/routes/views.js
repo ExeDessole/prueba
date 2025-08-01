@@ -52,12 +52,33 @@ views.get("/failed", (req, res) => {
 views.get("/cart", authenticateToken, async (req, res) => {
   try {
     const userId = req.user.id;
-    const cart = await cartServices.getCartByUserId(userId);
-    res.render("product/cart", { cart: cart.toObject() });
+    const cartDoc = await cartServices.getCartByUserId(userId);
+
+    if (!cartDoc) {
+      return res.render("product/cart", { cart: { products: [] }, totalCarrito: 0 });
+    }
+
+    const cart = cartDoc.toObject();
+
+    // Filtrar productos cuyo .product sea nulo (por si fueron eliminados de la DB)
+    cart.products = cart.products.filter(item => item.product);
+
+    // Agregar total por producto
+    cart.products = cart.products.map(item => ({
+      ...item,
+      total: item.product.price * item.quantity
+    }));
+
+    // Calcular total general del carrito
+    const totalCarrito = cart.products.reduce((acc, item) => acc + item.total, 0);
+
+    res.render("product/cart", { cart, totalCarrito });
   } catch (error) {
     console.error("❌ Error al renderizar carrito:", error);
     res.status(500).render("auth/failed", { error: error.message });
   }
 });
+
+
 
 export default views;

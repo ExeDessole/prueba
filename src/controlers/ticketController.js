@@ -3,7 +3,9 @@ import ticketServices from "../services/ticketServices.js";
 export async function checkout(req, res) {
   try {
     const userId = req.user.id;
-    const ticket = await ticketServices.checkout(userId);
+    const ticketDoc = await ticketServices.checkout(userId);
+    const ticket = ticketDoc.toObject();
+
     res.status(201).render("ticket/ticket", { ticket });
   } catch (error) {
     res.status(500).render("auth/failed", { error: error.message });

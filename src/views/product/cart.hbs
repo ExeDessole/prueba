@@ -103,6 +103,13 @@
       background-color: #0056b3;
     }
 
+    .total {
+      margin-top: 2rem;
+      font-size: 1.3rem;
+      color: #333;
+      font-weight: bold;
+    }
+
   </style>
 </head>
 <body>
@@ -123,12 +130,17 @@
             <p><strong>Categoría:</strong> {{this.product.category}}</p>
             <p><strong>Cantidad:</strong> {{this.quantity}}</p>
             <p class="price">$ {{this.product.price}}</p>
+            <p><strong>Total:</strong> ${{this.total}}</p>
 
             <form method="POST" action="/api/cart/remove/{{this.product._id}}?_method=DELETE">
               <button type="submit">Eliminar</button>
             </form>
           </div>
         {{/each}}
+      </div>
+
+      <div class="total">
+        Total del carrito: ${{totalCarrito}}
       </div>
 
       <div class="actions">
@@ -156,4 +168,5 @@
   </div>
 </body>
 </html>
+
 

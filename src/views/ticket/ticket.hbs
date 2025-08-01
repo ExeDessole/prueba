@@ -1,11 +1,114 @@
-<h1>Compra realizada con éxito</h1>
-<p><strong>Código:</strong> {{ticket.code}}</p>
-<p><strong>Fecha:</strong> {{ticket.purchase_datetime}}</p>
-<p><strong>Total:</strong> ${{ticket.amount}}</p>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Compra exitosa</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 2rem;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f4f4;
+    }
 
-<h2>Productos:</h2>
-<ul>
-  {{#each ticket.products}}
-    <li>{{this.product.name}} (x{{this.quantity}}) - ${{this.product.price}}</li>
-  {{/each}}
-</ul>
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    h1 {
+      color: #28a745;
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      color: #333;
+      margin-top: 2rem;
+    }
+
+    p {
+      font-size: 1rem;
+      color: #555;
+      margin: 0.5rem 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .card {
+      background: #fefefe;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .card h3 {
+      color: #007BFF;
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
+      margin: 0.3rem 0;
+      font-size: 0.95rem;
+      color: #444;
+    }
+
+    .back-btn {
+      margin-top: 2rem;
+    }
+
+    .back-btn form button {
+      background-color: #007BFF;
+      color: white;
+      padding: 0.6rem 1.5rem;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .back-btn form button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Compra realizada con éxito</h1>
+
+    <p><strong>Código:</strong> {{ticket.code}}</p>
+    <p><strong>Fecha:</strong> {{ticket.purchase_datetime}}</p>
+    <p><strong>Total:</strong> ${{ticket.amount}}</p>
+
+    <h2>Productos adquiridos</h2>
+
+    <div class="grid">
+      {{#each ticket.products}}
+        <div class="card">
+          <h3>{{this.product.name}}</h3>
+          <p><strong>Cantidad:</strong> {{this.quantity}}</p>
+          <p><strong>Precio unitario:</strong> ${{this.product.price}}</p>
+        </div>
+      {{/each}}
+    </div>
+
+    <div class="back-btn">
+      <form action="/products" method="GET">
+        <button type="submit">Volver al catálogo</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
+
